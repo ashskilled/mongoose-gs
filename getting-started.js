@@ -20,15 +20,33 @@ db.once('open', function(){
 
     /* schema  */
     const ingredientSchema = new mongoose.Schema({
-        name : String,
-        measurement: String, 
-        amount : Number 
+        name :{
+            type: String,
+            required: true
+        }, 
+        measurement: {
+            type: String,
+            required: true
+        }, 
+        amount : {
+            type:Number
+            required: true
+        }
     });
 
     const recipeSchema = new mongoose.Schema({
-        name : String, 
-        description: String,
-        instructions: String,
+        name : {
+            type: String,
+            required: true
+        }, 
+        description: {
+            type: String,
+            required: true
+        }, 
+        instructions: {
+            type: String,
+            required: true
+        }, 
         ingredients : [ingredientSchema]
     }); 
 
@@ -37,34 +55,71 @@ db.once('open', function(){
     const Recipe = mongoose.model('Recipe', recipeSchema); 
 
     /* documents */ 
-    let stoneSoupObj = {
-        name : "Stone Soup", 
-        description: "A soup made by tricked villagers",
-        instructions: "Trick each villager into donating for the soup for everyone",
+    /* Recipe 1 */
+
+    let hotTeaObj = {
+        name : "Hot Tea", 
+        description: "A hot tea to drink during cold winter",
+        instructions: "Boil water in the gas ",
         ingredients : [ 
-            { name : "Carrots",
+            { name : "Tea leaves",
+            measurement: "oz", 
+            amount : 5 },
+            
+            { name : "sugar",
+            measurement: "tea spoon", 
+            amount : 1.2 },
+
+            { name : "water",
             measurement: "Cups", 
+            amount : 1
+            }
+        ]
+    };
+
+    let hotTea = new Recipe(hotTeaObj);
+    
+  /* Recipe 2 */
+    
+    let mamaSoupObj = {
+        name : "Chicken Soup", 
+        description: "Soup made by mama",
+        instructions: "Ask mama to make chicken soup",
+        ingredients : [ 
+            { name : "Chicken",
+            measurement: "oz", 
             amount : 5 },
             
             { name : "Onions",
             measurement: "Cups", 
             amount : 5.5 },
 
-            { name : "Whatever is on hand",
+            { name : "garlic",
             measurement: "Cups", 
-            amount : 5 
+            amount : 1.5
             }
         ]
     };
 
-    let stoneSoup = new Recipe(stoneSoupObj);
-
+    let mamaSoup = new Recipe(mamaSoupObj);
+    
+    
+    
     let silence = new Kitten({ name : "Silence" }); 
     silence.speak(); 
     silence.name = "Loud";
 
-    const fluffy = new Kitten({name : "fluffy"}); 
-    fluffy.speak(); 
+
+
+
+
+    let dal = new Recipe({ name : "lental" }); 
+     
+    lental.name = "dal soup";
+    leantal.measurement = "Cups";
+    lental.amount ="1"
+
+   
 
     /* how to save a document after it's been created/updated */ 
     fluffy.save(function(err, fluffy){
@@ -72,22 +127,11 @@ db.once('open', function(){
         fluffy.speak(); 
     });
 
-    silence.save(function(err,cat){
+    leantal.save(function(err, soup){
         if(err) return console.error(err);
-        cat.speak(); 
+        soup.recipeSchema(); 
     })
     
-    /*find is a method attached directly to our Kitten model/class */ 
-    Kitten.find(function(err, kittens){
-        if(err) return console.error(err);
-        console.log(kittens); 
-    })
-
-    /* mongoose supports mongodb's rich query language */ 
-    Kitten.find({ name: /^fluff/ }, function(err,cat){
-        //check for errors
-        //print to console. 
-    })
 
 });
 
