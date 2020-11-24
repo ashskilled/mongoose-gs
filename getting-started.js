@@ -122,10 +122,7 @@ db.once('open', function(){
    
 
     /* how to save a document after it's been created/updated */ 
-    fluffy.save(function(err, fluffy){
-        if(err) return console.error(err); 
-        fluffy.speak(); 
-    });
+
 
     leantal.save(function(err, soup){
         if(err) return console.error(err);
