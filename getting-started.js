@@ -103,15 +103,8 @@ db.once('open', function(){
 
     let mamaSoup = new Recipe(mamaSoupObj);
     
-    
-    
-    let silence = new Kitten({ name : "Silence" }); 
-    silence.speak(); 
-    silence.name = "Loud";
 
-
-
-
+    /* creating new Recipe  */
 
     let dal = new Recipe({ name : "lental" }); 
      
